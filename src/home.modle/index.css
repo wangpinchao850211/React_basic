@@ -1,0 +1,6 @@
+.route_basic{
+    display: flex;
+    flex: 1;
+    height: 80vh;
+    border: 3px solid blue;
+}

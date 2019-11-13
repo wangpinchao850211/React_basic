@@ -11,6 +11,21 @@ import AliCloud from './alicloud.modle';
 import Home from './home.modle';
 import notComponent from './notComponent';
 
+import ThemeContext from './theme.context';
+
+const theme = {
+  light: {
+    classnames: 'btn-light',
+    bgColor: '#eeeeee',
+    color: '#000'
+  },
+  dark: {
+    classnames: 'btn-dark',
+    bgColor: '#222222',
+    color: '#fff'
+  }
+}
+
 const routes = [
     {
         path: "/",
@@ -43,68 +58,68 @@ export default class RouteMap extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sidebar: false
+            sidebar: false,
+            theme: 'dark',
         }
         this.sidebar = React.createRef();
         this.miniSidebar = React.createRef();
     }
-    componentDidMount() {
-            this.animationBar.bind(this);
-    }
+    componentDidMount() {}
     updateHandle = () => {
         console.log('每次router变化之后都会触发')
         if (this.state.sidebar) {
-            // this.animationBar(); // 缩回动画待弄
-            this.setState({sidebar: false});
+            this.animationBar(); // 缩回动画待弄
         }
     }
     updateSidebar() {
         this.setState({sidebar: true});
-        this.animationBar.bind(this);
+    }
+    animationMiniBar() {
+        const miniEl = this.miniSidebar;
+        miniEl.current.className = `${miniEl.current.className} removeMinibar`;
+        setTimeout(() => { // minibar缩回去之后再调隐藏函数
+            this.updateSidebar(); 
+        },600);
     }
     animationBar() {
         const barEl = this.sidebar;
-        const miniEl = this.miniSidebar;
-        console.log(barEl.current);
-        console.log(miniEl);
-        // const animaInterVal = setInterval(() => {
-        //     if (barEl.style.left > -100) {
-        //         barEl.style.left -=  '10px';
-        //     } else {
-        //         clearInterval(animaInterVal);
-        //     }
-        // }, 80);
-        
+        barEl.current.className = `${barEl.current.className} removeSidebar`;
+        setTimeout(() => { // 动画执行完毕,再隐藏
+            this.setState({sidebar: false});
+        }, 800);
     }
     render () {
         return (
             // Router中只能有一个子元素
-            <Router>
-              <div className="routeWrapper">
-                {this.state.sidebar?<ul className="sidebar" ref={this.sidebar}>
-                        {routes.map((item, index) => (
-                            <li key={index} onClick={this.updateHandle.bind(this)}>
-                                <Link to={item.path}>{item.sidebarName}</Link>
-                            </li>
-                        ))}
-                </ul>:<Minibar ref={this.miniSidebar} onClick={this.updateSidebar.bind(this)} />}
-                {/* path定义路由的url
-                exact表示严格匹配,匹配到当前路由不再向下匹配
-                component表示该条路由对应的组件, Switch 匹配到了就不会再向下匹配了*/}
-                <Switch>
-                    {routes.map((route, index) => (
-                        <Route
-                            key={index}
-                            path={route.path}
-                            exact={route.exact}
-                            render={route.method}
-                            component={route.main}
-                        />
-                    ))}
-                    <Route path="*" component={notComponent} />
-                </Switch>
-              </div>
-            </Router>
+            // 使用value传入值，在form组件里进行使用主题切换留言板背景色,可以在这个顶层组件指定两个按钮进行theme主题的切换
+            <ThemeContext.Provider value={theme[this.state.theme]}>
+                <Router>
+                    <div className="routeWrapper">
+                        {this.state.sidebar?<ul className="sidebar" ref={this.sidebar}>
+                                {routes.map((item, index) => (
+                                    <li key={index} onClick={this.updateHandle.bind(this)}>
+                                        <Link to={item.path}>{item.sidebarName}</Link>
+                                    </li>
+                                ))}
+                        </ul>:<Minibar ref={this.miniSidebar} onClick={() => {this.animationMiniBar();}} />}
+                        {/* path定义路由的url
+                        exact表示严格匹配,匹配到当前路由不再向下匹配
+                        component表示该条路由对应的组件, Switch 匹配到了就不会再向下匹配了*/}
+                        <Switch>
+                            {routes.map((route, index) => (
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    exact={route.exact}
+                                    render={route.method}
+                                    component={route.main}
+                                />
+                            ))}
+                            <Route path="*" component={notComponent} />
+                        </Switch>
+                    </div>
+                </Router>
+            </ThemeContext.Provider>
           );
     }
     

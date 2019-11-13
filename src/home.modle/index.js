@@ -34,10 +34,10 @@ export default class Home extends Component {
                     <Link to="/routebasic">路由基础</Link>
                     <br/>
                     <Link to="/routebasic/123">带参数的路由基础</Link>
-                    <br/>
-                    <Link to="/form">form表单</Link>
                     <br />
                     <Link to="/routebasic/sub">form/sub</Link>
+                    <br/>
+                    <Link to="/form">form表单</Link>
                     <Route path="/routebasic" component={RouteBasic}></Route>
                     <Route path="/form" component={From}></Route>
                 </Router>

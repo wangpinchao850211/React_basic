@@ -1,0 +1,39 @@
+.Lyb-wrapper{
+    width: 45%;
+    height: 88%;
+    background-color: whitesmoke;
+    margin: 20px;
+    border-radius: 8px;
+}
+h3{
+    text-align: center;
+}
+
+.comment-list-component, form{
+    padding: 20px;
+}
+
+.list-group{
+    list-style: none;
+    padding-left: 0;
+}
+.list-group > li {
+    width: 80%;
+    height: 26px;
+    line-height: 26px;
+    padding-left: 20px;
+    border: 1px solid lightcyan;
+    background: lightskyblue;
+    border-radius: 5px;
+}
+.list-group > li > span {
+    float: right;
+    margin-right: 16px;
+    cursor: pointer;
+}
+.btn-primary{
+    padding-left: 8px;
+    padding-right: 8px;
+    background: rgb(152, 152, 230);
+    border-radius: 10px;
+}

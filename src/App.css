@@ -14,6 +14,10 @@
   0%{left: -100px;top: 0;}
   100%{left: 0px;top: 0;}
 }
+@keyframes removeBarLeft{
+  0%{left: 0px;top: 0;}
+  100%{left: -100px;top: 0;}
+}
 .sidebar{
   list-style: none;
   position: absolute;
@@ -25,6 +29,9 @@
   border-right: 2px solid brown;
   border-bottom: px solid brown;
   animation: changebarLeft .8s;
+}
+.removeSidebar{
+  animation: removeBarLeft .8s;
 }
 .sidebar > li:nth-child(1){
   height: 0px;
@@ -38,9 +45,18 @@
   line-height: 30px;
   border-bottom: 1px solid gray;
   padding: 6px;
+  background: white;
 }
 .sidebar > li > a {
   text-decoration: none;
+}
+@keyframes changeMinibarRight{
+  0%{right: -44px;}
+  100%{right: -16px;}
+}
+@keyframes removeMiniBarLeft{
+  0%{right: -16px;}
+  100%{right: -44px;}
 }
 .minibar{
   position: absolute;
@@ -54,4 +70,8 @@
   cursor: pointer;
   padding-left: 6px;
   padding-top: 5px;
+  animation: changeMinibarRight .8s;
+}
+.removeMinibar{
+  animation: removeMiniBarLeft .8s;
 }

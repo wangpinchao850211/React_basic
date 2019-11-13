@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom';
+import './route.css';
 
 export default class RouteBasic extends Component {
     constructor(props) {
@@ -8,7 +9,7 @@ export default class RouteBasic extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="routeBasic">
                 组件route_basic
                 
                 <Switch>
