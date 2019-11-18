@@ -65,8 +65,10 @@ export default class RouteMap extends Component {
         this.miniSidebar = React.createRef();
     }
     componentDidMount() {}
-    updateHandle = () => {
+    routechange() {
         console.log('每次router变化之后都会触发')
+    }
+    updateHandle = () => {
         if (this.state.sidebar) {
             this.animationBar(); // 缩回动画待弄
         }
@@ -93,7 +95,7 @@ export default class RouteMap extends Component {
             // Router中只能有一个子元素
             // 使用value传入值，在form组件里进行使用主题切换留言板背景色,可以在这个顶层组件指定两个按钮进行theme主题的切换
             <ThemeContext.Provider value={theme[this.state.theme]}>
-                <Router>
+                <Router onUpdate={this.routechange.bind(this)}>
                     <div className="routeWrapper">
                         {this.state.sidebar?<ul className="sidebar" ref={this.sidebar}>
                                 {routes.map((item, index) => (
