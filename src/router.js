@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Link, Redirect, Switch } from "react-ro
 */
 import AliCloud from './alicloud.modle';
 import Home from './home.modle';
+import Dzdp from './dzdp.modle';
 import notComponent from './notComponent';
 
 import ThemeContext from './theme.context';
@@ -36,6 +37,11 @@ const routes = [
         path: "/home",
         sidebarName: 'Go home',
         main: () => <Home />
+    },
+    {
+        path: "/dzdp",
+        sidebarName: '大众点评',
+        main: () => <Dzdp />
     },
     {
         path: "/alicloud",

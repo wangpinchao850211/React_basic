@@ -1,0 +1,6 @@
+.carousel > div{
+    height: 80px;
+    background: rebeccapurple;
+    font-size: 18px;
+    color: whitesmoke;
+}
