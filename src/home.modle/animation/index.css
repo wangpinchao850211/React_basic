@@ -1,0 +1,62 @@
+.show {
+    opacity: 1;
+    animation: show-item 2s ease-in forwards;
+}
+.hide {
+    opacity: 0;
+    /* forwards保证最后一帧不变化 */
+    animation: hide-item 2s ease-in forwards;
+}
+@keyframes show-item {
+    0% {
+        opacity: 0;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 1;
+        color: blue;
+    }
+}
+
+@keyframes hide-item {
+    0% {
+        opacity: 1;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 0;
+        color: blue;
+    }
+}
+/* transition css class */
+/* 下面是入场动画 */
+/* appear首次执行触发 */
+.fade-wpc-enter, .fade-wpc-appear{
+    opacity: 0;
+} 
+.fade-wpc-enter-active, .fade-wpc-appear-active{
+    opacity: 1;
+    transition: opacity 1s ease-in;
+} 
+.fade-wpc-enter-done {
+    opacity: 1;
+}
+/* 下面是出场动画 */
+.fade-wpc-exit{
+    opacity: 1;
+}
+.fade-wpc-exit-active{
+    opacity: 0;
+    transition: opacity 1s ease-in;
+} 
+.fade-wpc-exit-done{
+    opacity: 0;
+}
