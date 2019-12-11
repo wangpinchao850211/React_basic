@@ -1,0 +1,24 @@
+{
+    "AngularBasic": [
+        "heros",
+        "routers",
+        "communication",
+        "directivesOrpip",
+        "form",
+        "dependencyinjection",
+        "lifecycle",
+        "peekboo",
+        "ngContent",
+        "showWorkMemberList",
+        "fileUpload"
+    ],
+    "AngularRxjs": [
+      "rxjsBasic",
+      "ngrxStore"
+    ],
+    "AngularAnimate": ["animateBasic"],
+    "chain_shared": ["CommonComponent"],
+    "Angular_Material": ["AngularMaterial"],
+    "Angular_Scss": ["AngularScss"],
+    "Mvc_Use_h5_Css3": ["MvcUseH5Css3"]
+  }
