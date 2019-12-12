@@ -4,6 +4,7 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import RouteBasic from './route_basic/route';
 import From from './Form/Form';
 import Animation from './animation';
+import TodoList from './todolist';
 import './index.css';
 
 // class HomeLayout extends Component {
@@ -41,9 +42,12 @@ export default class Home extends Component {
                     <Link to="/form">form表单</Link>
                     <br/>
                     <Link to="/animation">reactcss过渡动画</Link>
+                    <br />
+                    <Link to="/todolist">TodoList</Link>
                     <Route path="/routebasic" component={RouteBasic}></Route>
                     <Route path="/form" component={From}></Route>
                     <Route path="/animation" component={Animation}></Route>
+                    <Route path="/todolist" component={TodoList}></Route>
                 </Router>
             </div>
             
