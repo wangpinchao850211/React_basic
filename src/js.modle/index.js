@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
-import './index.css';
+import '../assets/iconfont/iconfont.css'; // 直接引入生成的icon的css文件
+import './style.js';
 import { getList, getInitList } from '../store/actionCreators';
 import store from '../store';
+import Header from './header';
 
 export default class JanShu extends Component {
-    constructor(props) {
-        super(props)
-    }
     
     render() {
         return (
-            <div>
-                简书页面
+            <div style={{height: '100vh', background: '#fff'}}>
+                <Header></Header>
             </div>
         )
     }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react';
 import { connect } from 'react-redux';
 import { CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DETELE_TODO_ITEM } from '../../store/actionTypes';
 import './index.css';
