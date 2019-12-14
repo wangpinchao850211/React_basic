@@ -1,7 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import { HeaderWrapper, Logo, Nav, NavItem, NavSearch, Addition, Button, SearchWrapper } from './style.js';
 
 export default class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            fouced: false
+        }
+        this.handleFouce = this.handleFouce.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
+    }
     render() {
         return ( 
             <HeaderWrapper>
@@ -14,8 +23,18 @@ export default class Header extends Component {
                         <i className="iconfont">&#xe636;</i>
                     </NavItem>
                     <SearchWrapper>
-                        <NavSearch></NavSearch>
-                        <i className="iconfont">&#xe617;</i>
+                        <CSSTransition
+							in={this.state.fouced}
+							timeout={200}
+							classNames="slide"
+						>
+                            <NavSearch 
+                                className={this.state.fouced ? 'fouced': ''}
+                                onFocus={this.handleFouce}
+                                onBlur={this.handleBlur}
+                            ></NavSearch>
+                        </CSSTransition>
+                        <i className={this.state.fouced ? 'iconfont fouced': 'iconfont'} >&#xe617;</i>
                     </SearchWrapper>
                 </Nav>
                 <Addition>
@@ -27,5 +46,15 @@ export default class Header extends Component {
                 </Addition>
             </HeaderWrapper>
         )
+    }
+    handleFouce() {
+        this.setState({
+            fouced: !this.state.fouced
+        })
+    }
+    handleBlur() {
+        this.setState({
+            fouced: !this.state.fouced
+        })
     }
 }
