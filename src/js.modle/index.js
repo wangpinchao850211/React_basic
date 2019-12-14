@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import '../assets/iconfont/iconfont.css'; // 直接引入生成的icon的css文件
 import './style.js';
 import { getList, getInitList } from '../store/actionCreators';
+import { Provider } from 'react-redux';
 import store from '../store';
 import Header from './header';
 
@@ -10,7 +11,9 @@ export default class JanShu extends Component {
     render() {
         return (
             <div style={{height: '100vh', background: '#fff'}}>
-                <Header></Header>
+                <Provider store={store}>
+                    <Header></Header>
+                </Provider>
             </div>
         )
     }

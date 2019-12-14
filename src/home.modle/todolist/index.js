@@ -30,8 +30,8 @@ const TodoList = (props) => {
 // 把state的数据映射为组件的props
 const mapStateToProps = (state) => {
     return {
-        inputValue: state.inputValue,
-        list: state.list
+        inputValue: state.todolist.inputValue,
+        list: state.todolist.list
     }
 }
 // 把store的dispatch方法挂载到props上
