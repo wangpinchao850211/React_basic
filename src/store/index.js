@@ -1,16 +1,16 @@
 import { createStore, applyMiddleware } from 'redux';
-// import thunk from 'redux-thunk';
+import thunk from 'redux-thunk';
 import allReducer from './reducer';
-import createSagaMiddleware from 'redux-saga';
-import mySaga from './sagas';
+// import createSagaMiddleware from 'redux-saga';
+// import mySaga from './sagas';
 
-// thunk暂时注销
-// const store = createStore(reducer, applyMiddleware(thunk));
+// thunk 进行ajax请求
+const store = createStore(allReducer, applyMiddleware(thunk));
 
-// create the saga middleware
-const sagaMiddleware = createSagaMiddleware()
-const store = createStore(allReducer, applyMiddleware(sagaMiddleware));
+// Used the saga 进行ajax请求方法 create the saga middleware
+// const sagaMiddleware = createSagaMiddleware()
+// const store = createStore(allReducer, applyMiddleware(sagaMiddleware));
 // then run the saga
-sagaMiddleware.run(mySaga);
+// sagaMiddleware.run(mySaga);
 
 export default store;

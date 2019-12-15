@@ -20,40 +20,35 @@ class Header extends Component {
     }
 
     getListArea() {
-		// const { focused, list, page, totalPage, mouseIn, handleMouseEnter, handleMouseLeave, handleChangePage } = this.props;
-		// const newList = list.toJS();
-		// const pageList = [];
+		const { focused, list, page, totalPage, mouseIn, handleMouseEnter, handleMouseLeave, handleChangePage } = this.props;
+		const newList = list.toJS();
+		const pageList = [];
 
-		// if (newList.length) {
-		// 	for (let i = (page - 1) * 10; i < page * 10; i++) {
-		// 		pageList.push(
-		// 			<SearchInfoItem key={newList[i]}>{newList[i]}</SearchInfoItem>
-		// 		)
-		// 	}
-		// }
+		if (newList.length) { // 判断只有ajax返回数据再进行ui组件的渲染
+			for (let i = (page - 1) * 10; i < page * 10; i++) {
+				pageList.push(
+					<SearchInfoItem key={newList[i]}>{newList[i]}</SearchInfoItem>
+				)
+			}
+		}
 
-		if (this.state.fouced) {
+		if (focused || mouseIn) {
 			return (
 				<SearchInfo 
-					// onMouseEnter={handleMouseEnter}
-					// onMouseLeave={handleMouseLeave}
+					onMouseEnter={handleMouseEnter}
+					onMouseLeave={handleMouseLeave}
 				>
 					<SearchInfoTitle>
 						热门搜索
 						<SearchInfoSwitch 
-							// onClick={() => handleChangePage(page, totalPage, this.spinIcon)}
+							onClick={() => handleChangePage(page, totalPage, this.spinIcon)}
 						>
-							{/* <i ref={(icon) => {this.spinIcon = icon}} className="iconfont spin">&#xe851;</i> */}
+							<i ref={(icon) => {this.spinIcon = icon}} className="iconfont spin">&#xe851;</i>
 							换一批
 						</SearchInfoSwitch>
 					</SearchInfoTitle>
 					<SearchInfoList>
-                        {/* {pageList} */}
-                        <SearchInfoItem key="1">qwedqw</SearchInfoItem>
-                        <SearchInfoItem key="2">qwedqw</SearchInfoItem>
-                        <SearchInfoItem key="3">qwedqw</SearchInfoItem>
-                        <SearchInfoItem key="4">qwedqw</SearchInfoItem>
-                        <SearchInfoItem key="5">qwedqw</SearchInfoItem>
+                        {pageList}
 					</SearchInfoList>
 				</SearchInfo>
 			)
@@ -62,6 +57,7 @@ class Header extends Component {
 		}
 	}
     render() {
+		const { focused, handleInputFocus, handleInputBlur, list, login, logout } = this.props;
         return ( 
             <HeaderWrapper>
                 <Logo></Logo>
@@ -74,17 +70,17 @@ class Header extends Component {
                     </NavItem>
                     <SearchWrapper>
                         <CSSTransition
-							in={this.state.fouced}
+							in={focused}
 							timeout={200}
 							classNames="slide"
 						>
                             <NavSearch 
-                                className={this.state.fouced ? 'fouced': ''}
-                                onFocus={this.handleFouce}
-                                onBlur={this.handleBlur}
+                                className={focused ? 'fouced': ''}
+                                onFocus={() => {handleInputFocus(list)}}
+                                onBlur={handleInputBlur}
                             ></NavSearch>
                         </CSSTransition>
-                        <i className={this.state.fouced ? 'iconfont fouced': 'iconfont'} >&#xe617;</i>
+                        <i className={focused ? 'iconfont fouced zoom': 'iconfont zoom'} >&#xe617;</i>
                         {this.getListArea()}
                     </SearchWrapper>
                 </Nav>
@@ -113,10 +109,10 @@ class Header extends Component {
 const mapStateToProps = (state) => {
 	return {
 		focused: state.getIn(['header', 'focused']),
-		// list: state.getIn(['header', 'list']),
-		// page: state.getIn(['header', 'page']),
-		// totalPage: state.getIn(['header', 'totalPage']),
-		// mouseIn: state.getIn(['header', 'mouseIn']),
+		list: state.getIn(['header', 'list']),
+		page: state.getIn(['header', 'page']),
+		totalPage: state.getIn(['header', 'totalPage']),
+		mouseIn: state.getIn(['header', 'mouseIn']),
 		// login: state.getIn(['login', 'login'])
 	}
 }
@@ -130,27 +126,27 @@ const mapDispathToProps = (dispatch) => {
 		handleInputBlur() {
 			dispatch(actionCreators.searchBlur());
 		},
-		// handleMouseEnter() {
-		// 	dispatch(actionCreators.mouseEnter());
-		// },
-		// handleMouseLeave() {
-		// 	dispatch(actionCreators.mouseLeave());
-		// },
-		// handleChangePage(page, totalPage, spin) {
-		// 	let originAngle = spin.style.transform.replace(/[^0-9]/ig, '');
-		// 	if (originAngle) {
-		// 		originAngle = parseInt(originAngle, 10);
-		// 	}else {
-		// 		originAngle = 0;
-		// 	}
-		// 	spin.style.transform = 'rotate(' + (originAngle + 360) + 'deg)';
+		handleMouseEnter() {
+			dispatch(actionCreators.mouseEnter());
+		},
+		handleMouseLeave() {
+			dispatch(actionCreators.mouseLeave());
+		},
+		handleChangePage(page, totalPage, spin) {
+			let originAngle = spin.style.transform.replace(/[^0-9]/ig, ''); // 不是数字的字符串替换成空字符串
+			if (originAngle) {
+				originAngle = parseInt(originAngle, 10);
+			}else {
+				originAngle = 0;
+			}
+			spin.style.transform = 'rotate(' + (originAngle + 360) + 'deg)';
 
-		// 	if (page < totalPage) {
-		// 		dispatch(actionCreators.changePage(page + 1));
-		// 	}else {
-		// 		dispatch(actionCreators.changePage(1));
-		// 	}
-		// },
+			if (page < totalPage) {
+				dispatch(actionCreators.changePage(page + 1));
+			}else { // 切换回第一页
+				dispatch(actionCreators.changePage(1));
+			}
+		},
 		// logout() {
 		// 	dispatch(loginActionCreators.logout())
 		// }

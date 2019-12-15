@@ -85,7 +85,7 @@ export const SearchWrapper = styled.div`
     float: left;
     // overflow: hidden;
     position: relative;
-    .iconfont {
+    .zoom {
         position: absolute;
 		right: 5px;
 		bottom: 5px;
