@@ -3,8 +3,11 @@ import '../assets/iconfont/iconfont.css'; // 直接引入生成的icon的css文�
 import './style.js';
 import { getList, getInitList } from '../store/actionCreators';
 import { Provider } from 'react-redux';
+import { BrowserRouter, Route } from 'react-router-dom';
 import store from '../store';
 import Header from './header';
+import JsHome from './home';
+import Detail from './detail';
 
 export default class JanShu extends Component {
     
@@ -13,6 +16,12 @@ export default class JanShu extends Component {
             <div style={{height: '100vh', background: '#fff'}}>
                 <Provider store={store}>
                     <Header></Header>
+                    <BrowserRouter>
+                        <div>
+                            <Route path='/js' exact component={JsHome}></Route>
+                            <Route path='/js/detail' exact component={Detail}></Route>
+                        </div>
+                    </BrowserRouter>
                 </Provider>
             </div>
         )
