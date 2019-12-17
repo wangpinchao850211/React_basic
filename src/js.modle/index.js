@@ -13,13 +13,13 @@ export default class JanShu extends Component {
     
     render() {
         return (
-            <div style={{height: '100vh', background: '#fff'}}>
+            <div style={{background: '#fff'}}>
                 <Provider store={store}>
                     <Header></Header>
                     <BrowserRouter>
                         <div>
                             <Route path='/js' exact component={JsHome}></Route>
-                            <Route path='/js/detail' exact component={Detail}></Route>
+                            <Route path='/js/detail/:id' exact component={Detail}></Route>
                         </div>
                     </BrowserRouter>
                 </Provider>

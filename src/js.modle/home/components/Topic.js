@@ -1,18 +1,32 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { TopicWrapper, TopicItem } from '../style';
 
-export default class Topic extends Component {
+class Topic extends PureComponent {
     render() {
         return (
             <TopicWrapper>
-                <TopicItem>
-                    <img
-                        className='topic-pic'
-                        src='//upload.jianshu.io/collections/images/261938/man-hands-reading-boy-large.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/64/h/64' 
-                    />
-                    社会热点
-                </TopicItem>
+                {
+                    this.props.list.map((item) => {
+                        return (
+                            <TopicItem key={item.get('id')}>
+                                <img
+                                    className='topic-pic'
+                                    src={item.get('imgUrl')} 
+                                />
+                                {item.get('title')}
+                            </TopicItem>
+                        )
+                    })
+                }
             </TopicWrapper>
         )
     }
 }
+const mapState = (state) => {
+    return {
+        list: state.getIn(['home', 'topicList'])
+    }
+};
+// 与store做链接
+export default connect(mapState, null)(Topic);
