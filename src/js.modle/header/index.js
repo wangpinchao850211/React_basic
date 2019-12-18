@@ -3,6 +3,7 @@ import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { actionCreators } from './store';
+import { actionCreators as loginActionCreators } from '../login/store';
 import { HeaderWrapper, Logo, Nav, NavItem, NavSearch, SearchInfo,
 	SearchInfoTitle,
 	SearchInfoSwitch,
@@ -59,6 +60,7 @@ class Header extends Component {
 	}
     render() {
 		const { focused, handleInputFocus, handleInputBlur, list, login, logout } = this.props;
+		console.log(login);
         return ( 
             <HeaderWrapper>
 				<Link to="/">
@@ -67,7 +69,12 @@ class Header extends Component {
                 <Nav>
                     <NavItem className='left active'>首页</NavItem>
                     <NavItem className='left '>下载APP</NavItem>
-                    <NavItem className='right '>登录</NavItem>
+					{
+						login ? <NavItem className='right ' onClick={logout}>退出</NavItem> : 
+							// <Link to="js/login"> 待研究路由标签！！！
+								<NavItem className='right ' onClick={() => {window.location.href='http://localhost:3000/js/login'}}>登录</NavItem>
+							// </Link>
+					}
                     <NavItem className='right '>
                         <i className="iconfont">&#xe636;</i>
                     </NavItem>
@@ -88,15 +95,18 @@ class Header extends Component {
                     </SearchWrapper>
                 </Nav>
                 <Addition>
-                    <Button className="writting">
-                        <i className="iconfont">&#xe6a4;</i>
-                        <span style={{marginLeft: '5px'}}>写文章</span>
-                    </Button>
+					{/* <Link to="/js/write"> */}
+						<Button className="writting" onClick={() => {window.location.href='http://localhost:3000/js/write'}}>
+							<i className="iconfont">&#xe6a4;</i>
+							<span style={{marginLeft: '5px'}}>写文章</span>
+						</Button>
+					{/* </Link> */}
                     <Button className="reg">注册</Button>
                 </Addition>
             </HeaderWrapper>
         )
-    }
+	}
+
     handleFouce() {
         this.setState({
             fouced: !this.state.fouced
@@ -116,7 +126,7 @@ const mapStateToProps = (state) => {
 		page: state.getIn(['header', 'page']),
 		totalPage: state.getIn(['header', 'totalPage']),
 		mouseIn: state.getIn(['header', 'mouseIn']),
-		// login: state.getIn(['login', 'login'])
+		login: state.getIn(['login', 'login'])
 	}
 }
 
@@ -150,9 +160,10 @@ const mapDispathToProps = (dispatch) => {
 				dispatch(actionCreators.changePage(1));
 			}
 		},
-		// logout() {
-		// 	dispatch(loginActionCreators.logout())
-		// }
+		logout() {
+			dispatch(loginActionCreators.logout());
+			window.location.href='http://localhost:3000/js/login'; // 前端登出
+		}
 	}
 }
 

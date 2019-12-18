@@ -13,8 +13,6 @@ import Recommend from './components/Recommend';
 import Writer from './components/Writer';
 
 class JsHome extends Component {
-
-
 	constructor(props) {
 		super(props);
 		this.bindEvents();
