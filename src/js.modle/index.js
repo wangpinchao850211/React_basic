@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import '../assets/iconfont/iconfont.css'; // 直接引入生成的icon的css文件
 import './style.js';
-import { getList, getInitList } from '../store/actionCreators';
+// import { getList, getInitList } from '../store/actionCreators';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import store from '../store';
@@ -56,7 +56,7 @@ export default class JanShu extends Component {
         // store.dispatch(action);
 
         // 派发正常action
-        const action = getInitList();
-        store.dispatch(action);
+        // const action = getInitList();
+        // store.dispatch(action);
     }
 }

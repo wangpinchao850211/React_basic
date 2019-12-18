@@ -12,6 +12,7 @@ class Topic extends PureComponent {
                             <TopicItem key={item.get('id')}>
                                 <img
                                     className='topic-pic'
+                                    alt='图片正在加载'
                                     src={item.get('imgUrl')} 
                                 />
                                 {item.get('title')}
